@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Romántica</title>
+    <!-- Cargando la fuente desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5e1e1; /* Fondo suave rosado */
+            color: #b76e79; /* Texto en color rosado oscuro */
+            display: flex; /* Flexbox para centrar */
+            justify-content: center; /* Centrar horizontalmente */
+            align-items: center; /* Centrar verticalmente */
+            height: 100vh; /* Altura completa de la ventana */
+            margin: 0; /* Eliminar márgenes */
+            flex-direction: column; /* Organizar los elementos en columna */
+            text-align: center;
+            position: relative; /* Necesario para posicionar elementos aleatorios */
+        }
+        h1 {
+            font-size: 2rem; /* Tamaño de texto más pequeño */
+            margin: 0; /* Eliminar margen */
+            font-family: 'Dancing Script', cursive; /* Fuente cursiva elegante */
+            color: #e34a8e; /* Color de texto rosado brillante */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra suave al texto */
+        }
+        p {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            font-family: 'Georgia', serif;
+            color: #7a3e5c;
+        }
+        .options {
+            margin-top: 30px;
+        }
+        .options button {
+            font-size: 1.5rem;
+            margin: 10px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #e34a8e;
+            color: white;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        .options button:hover {
+            background-color: #d13275; /* Cambia el color cuando pasas el ratón */
+        }
+        .hidden {
+            display: none; /* Ocultar contenido */
+        }
+        .heart {
+            font-size: 3rem;
+            color: #e34a8e;
+            margin-top: 30px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        /* Animación de latido de corazón */
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        /* Animación para el botón "No" que se mueve a un punto aleatorio */
+        @keyframes escape {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(var(--random-x), var(--random-y));
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="message">Hola mi lindo tulipán, quiero estar contigo siempre siempre, no me gusta que desconfíes o esas cosas, sabes que te amo mucho pero demasiado en fin, te hice esta página :p. Te amo mi princesa</h1>
+    <p>Podemos olvidar todo esto</p>
+
+    <!-- Opciones -->
+    <div class="options">
+        <button id="yesButton">Sí</button>
+        <button id="noButton">No</button>
+    </div>
+
+    <!-- Contenido que aparecerá si se hace clic en 'Sí' -->
+    <div id="newContent" class="hidden">
+        <p>Esto es un nuevo inicio entre los dos (mandame cap que no se que pusiste jeje, en fin una página simple perdón). Te amo mucho.</p>
+    </div>
+
+    <div class="heart">❤️</div> <!-- Corazón animado -->
+
+    <script>
+        // Seleccionamos los botones y el contenido nuevo
+        const yesButton = document.getElementById('yesButton');
+        const noButton = document.getElementById('noButton');
+        const newContent = document.getElementById('newContent');
+        const message = document.getElementById('message');
+
+        // Al hacer clic en 'Sí'
+        yesButton.addEventListener('click', () => {
+            newContent.classList.remove('hidden'); // Mostrar contenido nuevo
+            document.body.style.backgroundColor = '#c6f1f2'; // Cambiar color de fondo
+            yesButton.style.display = 'none'; // Ocultar botón 'Sí'
+            noButton.style.display = 'none'; // Ocultar botón 'No'
+        });
+
+        // Al hacer clic en 'No'
+        noButton.addEventListener('click', () => {
+            // Generar posiciones aleatorias para el botón "No"
+            const randomX = Math.random() * 80 - 40 + 'vw'; // Rango de movimiento horizontal
+            const randomY = Math.random() * 80 - 40 + 'vh'; // Rango de movimiento vertical
+
+            // Aplicar la animación de movimiento aleatorio
+            noButton.style.setProperty('--random-x', randomX);
+            noButton.style.setProperty('--random-y', randomY);
+            noButton.style.animation = 'escape 1s ease-in-out forwards'; // Mover el botón "No" a un lugar aleatorio
+        });
+    </script>
+</body>
+</html>
